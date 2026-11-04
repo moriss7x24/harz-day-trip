@@ -75,6 +75,7 @@
           <i class="fa-solid fa-map-location-dot text-sky-500"></i> 地理地圖
         </a>
         <a href="#plan-selection" class="text-slate-600 hover:text-sky-600 font-medium transition">方案規劃</a>
+        <a href="#scenic-gallery" class="text-slate-600 hover:text-sky-600 font-medium transition flex items-center gap-1"><i class="fa-solid fa-camera text-sky-500"></i> 實景寫真</a>
         <a href="#full-timetables" class="text-slate-600 hover:text-sky-600 font-medium transition">火車時刻</a>
         <a href="#official-documents" class="hidden sm:inline-block text-slate-600 hover:text-sky-600 font-medium transition">官方原件</a>
         <a href="#official-portals" class="hidden md:inline-block text-slate-600 hover:text-sky-600 font-medium transition">一手官網</a>
@@ -264,54 +265,214 @@
           </div>
         </div>
 
-        <!-- Comparative Table -->
+        <!-- Comparative Table (動態連動切換高亮) -->
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="border-b border-slate-200 text-slate-500 bg-slate-50/70">
-                <th class="p-2.5 font-medium">項目</th>
-                <th class="p-2.5 font-medium text-slate-900">方案 A (快閃 24 分鐘 · 推薦)</th>
-                <th class="p-2.5 font-medium text-slate-700">方案 B (停留 2 小時 11 分)</th>
+                <th class="p-2.5 font-medium text-slate-700 w-1/4">項目</th>
+                <th @click="plan = 'A'" :class="plan === 'A' ? 'bg-sky-100 text-sky-900 border-t-2 border-x-2 border-sky-500 font-bold shadow-sm' : 'text-slate-500 bg-slate-50/50 hover:bg-slate-100 cursor-pointer font-medium'" class="p-2.5 transition w-3/8">
+                  <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-bolt text-sky-600" x-show="plan === 'A'"></i>
+                    <span>方案 A (快閃 24 分鐘 · 推薦)</span>
+                    <span x-show="plan === 'A'" class="ml-auto text-[10px] px-1.5 py-0.5 bg-sky-600 text-white rounded font-sans font-normal">當前選定</span>
+                  </div>
+                </th>
+                <th @click="plan = 'B'" :class="plan === 'B' ? 'bg-sky-100 text-sky-900 border-t-2 border-x-2 border-sky-500 font-bold shadow-sm' : 'text-slate-500 bg-slate-50/50 hover:bg-slate-100 cursor-pointer font-medium'" class="p-2.5 transition w-3/8">
+                  <div class="flex items-center gap-1.5">
+                    <i class="fa-regular fa-clock text-sky-600" x-show="plan === 'B'"></i>
+                    <span>方案 B (停留 2 小時 11 分)</span>
+                    <span x-show="plan === 'B'" class="ml-auto text-[10px] px-1.5 py-0.5 bg-sky-600 text-white rounded font-sans font-normal">當前選定</span>
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 text-slate-700">
               <tr>
                 <td class="p-2.5 font-medium text-slate-500">山頂停留時間</td>
-                <td class="p-2.5 text-sky-600 font-mono font-medium">11:06 ～ 11:30 (24 分鐘)</td>
-                <td class="p-2.5 font-mono">11:06 ～ 13:17 (2 小時 11 分鐘)</td>
+                <td :class="plan === 'A' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-bold text-sky-700' : 'text-slate-400 bg-white/40'" class="p-2.5 font-mono transition">11:06 ～ 11:30 (24 分鐘)</td>
+                <td :class="plan === 'B' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-bold text-sky-700' : 'text-slate-400 bg-white/40'" class="p-2.5 font-mono transition">11:06 ～ 13:17 (2 小時 11 分鐘)</td>
               </tr>
               <tr>
                 <td class="p-2.5 font-medium text-slate-500">山頂核心活動</td>
-                <td class="p-2.5">火車加水調頭、1,141m 界石合照、雷達球罩與圍牆遠眺</td>
-                <td class="p-2.5">加訪 Brockenhaus 博物館、喝熱湯、走訪女巫祭壇石陣</td>
+                <td :class="plan === 'A' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">火車加水調頭、1,141m 界石合照、雷達球罩與圍牆遠眺</td>
+                <td :class="plan === 'B' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">加訪 Brockenhaus 博物館、喝熱湯、走訪女巫祭壇石陣</td>
               </tr>
               <tr>
                 <td class="p-2.5 font-medium text-slate-500">下山火車班次</td>
-                <td class="p-2.5"><span class="font-mono text-sky-600 font-semibold">8944</span> (11:30 發車 ➔ 13:29 抵市區)</td>
-                <td class="p-2.5"><span class="font-mono text-slate-800 font-semibold">8934</span> (13:17 發車 ➔ 15:03 抵市區)</td>
+                <td :class="plan === 'A' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition"><span class="font-mono text-sky-700 font-bold">8944</span> (11:30 發車 ➔ 13:29 抵市區)</td>
+                <td :class="plan === 'B' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition"><span class="font-mono text-sky-700 font-bold">8934</span> (13:17 發車 ➔ 15:03 抵市區)</td>
               </tr>
               <tr>
                 <td class="p-2.5 font-medium text-slate-500">午餐安排</td>
-                <td class="p-2.5 text-slate-900">13:30 返老城餐廳享用熱食大餐或年輪蛋糕</td>
-                <td class="p-2.5 text-slate-500">山頂 Brockenwirt 簡易自助餐（香腸、牛肉湯）</td>
+                <td :class="plan === 'A' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">13:30 返老城餐廳享用熱食大餐或年輪蛋糕</td>
+                <td :class="plan === 'B' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">山頂 Brockenwirt 簡易自助餐（香腸、牛肉湯）</td>
               </tr>
               <tr>
                 <td class="p-2.5 font-medium text-slate-500">老城漫步時間</td>
-                <td class="p-2.5 text-slate-900 font-medium">約 2.5 小時（14:00～16:45 日落前充分觀覽）</td>
-                <td class="p-2.5 text-slate-500">約 1.5 小時（15:15～16:45 重點精華拍照）</td>
+                <td :class="plan === 'A' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">約 2.5 小時（14:00～16:45 日落前充分觀覽）</td>
+                <td :class="plan === 'B' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">約 1.5 小時（15:15～16:45 重點精華拍照）</td>
               </tr>
               <tr>
                 <td class="p-2.5 font-medium text-slate-500">城堡入場時段</td>
-                <td class="p-2.5">17:15 入場（最後入場 17:30，開放至 18:00）</td>
-                <td class="p-2.5">17:15 入場（最後入場 17:30，開放至 18:00）</td>
+                <td :class="plan === 'A' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">17:15 入場（最後入場 17:30，開放至 18:00）</td>
+                <td :class="plan === 'B' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-slate-900' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">17:15 入場（最後入場 17:30，開放至 18:00）</td>
               </tr>
               <tr>
                 <td class="p-2.5 font-medium text-slate-500">防寒舒適度</td>
-                <td class="p-2.5 text-sky-600">極佳（短時間速覽，避免在強風暴雪中久候受凍）</td>
-                <td class="p-2.5 text-slate-500">需在零下 10°C 強風環境活動，多數時間需待室內</td>
+                <td :class="plan === 'A' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-sky-800' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">極佳（短時間速覽，避免在強風暴雪中久候受凍）</td>
+                <td :class="plan === 'B' ? 'bg-sky-50/70 border-x-2 border-sky-300 font-medium text-sky-800' : 'text-slate-400 bg-white/40'" class="p-2.5 transition">需在零下 10°C 強風環境活動，多數時間需待室內</td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <!-- Dynamic Detailed Schedule Table for Current Selected Plan (方案切換即時連動時刻表) -->
+        <div class="pt-3 border-t border-slate-200 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-table-list text-sky-600"></i>
+              <span x-text="plan === 'A' ? '⚡ 方案 A 專屬完整時刻表（24 分鐘快閃避寒 · 老城深度漫步）' : '🕒 方案 B 專屬完整時刻表（2 小時停留 · 博物館室內避寒）'"></span>
+            </h3>
+            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200 font-medium flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
+              <span x-text="plan === 'A' ? '已即時切換至【方案 A】全日班表' : '已即時切換至【方案 B】全日班表'"></span>
+            </span>
+          </div>
+
+          <!-- Table for Plan A -->
+          <div x-show="plan === 'A'" class="overflow-x-auto rounded-xl border border-sky-200 shadow-sm">
+            <table class="w-full text-left text-xs border-collapse bg-white">
+              <thead class="bg-sky-50/90 text-sky-950 font-semibold border-b border-sky-200">
+                <tr>
+                  <th class="p-2.5 font-mono">時間區段</th>
+                  <th class="p-2.5">運行路段 / 地點</th>
+                  <th class="p-2.5">交通方式 / 車次編號</th>
+                  <th class="p-2.5">行程亮點與關鍵提醒</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">08:06 - 08:38</td>
+                  <td class="p-2.5 font-medium text-slate-900">Goslar ➔ Wernigerode Hbf</td>
+                  <td class="p-2.5"><span class="font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">RE4 (32分直達)</span></td>
+                  <td class="p-2.5 text-slate-600">適用 Deutschlandticket（49€通票），出站後右轉 50m 到 HSB 車站。</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">08:45 - 09:20</td>
+                  <td class="p-2.5 font-medium text-slate-900">Wernigerode HSB 窄軌站</td>
+                  <td class="p-2.5"><span class="font-medium text-slate-800">購票 & 提早上車</span></td>
+                  <td class="p-2.5 text-slate-600">購買 €65 來回票（自由座）。建議提前 25 分鐘上車搶靠窗或室外觀景平台。</td>
+                </tr>
+                <tr class="bg-sky-50/40">
+                  <td class="p-2.5 font-mono font-bold text-sky-800 whitespace-nowrap">09:25 - 11:06</td>
+                  <td class="p-2.5 font-medium text-sky-950">Wernigerode ➔ Brocken 峰頂</td>
+                  <td class="p-2.5"><span class="font-mono font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded border border-sky-300">HSB 8943 直達</span></td>
+                  <td class="p-2.5 text-sky-900">經典蒸汽火車穿越雪白黑森林，途經 Drei Annen Hohne (10:15) 與 Schierke (10:35)。</td>
+                </tr>
+                <tr class="bg-sky-100/60 font-semibold">
+                  <td class="p-2.5 font-mono font-bold text-sky-900 whitespace-nowrap">11:06 - 11:30</td>
+                  <td class="p-2.5 font-bold text-sky-900">【方案 A 核心】布羅肯峰頂</td>
+                  <td class="p-2.5"><span class="font-bold text-sky-800 bg-white px-2 py-0.5 rounded border border-sky-300">快閃 24 分鐘避寒</span></td>
+                  <td class="p-2.5 text-sky-950">1,141m 標誌石碑合影、冷戰巨型雷達天線罩遠眺、觀賞火車雪地加水調頭作業。</td>
+                </tr>
+                <tr class="bg-sky-50/40">
+                  <td class="p-2.5 font-mono font-bold text-sky-800 whitespace-nowrap">11:30 - 13:29</td>
+                  <td class="p-2.5 font-medium text-sky-950">Brocken ➔ Wernigerode Hbf</td>
+                  <td class="p-2.5"><span class="font-mono font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded border border-sky-300">HSB 8944 原車折返</span></td>
+                  <td class="p-2.5 text-sky-900">原車直達回程，在溫暖車廂內欣賞雪景，完全避開山頂零下 10°C 暴風凍傷風險！</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">13:30 - 14:30</td>
+                  <td class="p-2.5 font-medium text-slate-900">Wernigerode 老城中心</td>
+                  <td class="p-2.5"><span class="font-medium text-slate-800">暖胃傳統午餐</span></td>
+                  <td class="p-2.5 text-slate-600">老城餐廳品嚐傳統脆皮德國豬腳、熱湯或百年老店炭火哈茨年輪蛋糕。</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">14:30 - 16:45</td>
+                  <td class="p-2.5 font-medium text-slate-900">Wernigerode 木桁架老城</td>
+                  <td class="p-2.5"><span class="font-medium text-slate-800">深度漫步觀光 (2.5h)</span></td>
+                  <td class="p-2.5 text-slate-600">參觀 1498 年雙尖塔市政廳、全德最窄屋（寬2.95m）、文藝復興街道，日落前光線充足。</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">17:00 - 18:00</td>
+                  <td class="p-2.5 font-medium text-slate-900">韋尼格羅德城堡 (Schloss)</td>
+                  <td class="p-2.5"><span class="font-medium text-slate-800">壓軸城堡點燈</span></td>
+                  <td class="p-2.5 text-slate-600">17:15 前入場，參觀宮殿展廳並於露台俯瞰整座女巫小鎮夢幻夜景。</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">20:18 - 20:53</td>
+                  <td class="p-2.5 font-medium text-slate-900">Wernigerode ➔ Goslar</td>
+                  <td class="p-2.5"><span class="font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">RE21 (35分直達)</span></td>
+                  <td class="p-2.5 text-slate-600">搭乘直達快車返回 Goslar 飯店休息（備案：19:21 或 21:21 RE4）。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table for Plan B -->
+          <div x-show="plan === 'B'" class="overflow-x-auto rounded-xl border border-sky-200 shadow-sm">
+            <table class="w-full text-left text-xs border-collapse bg-white">
+              <thead class="bg-sky-50/90 text-sky-950 font-semibold border-b border-sky-200">
+                <tr>
+                  <th class="p-2.5 font-mono">時間區段</th>
+                  <th class="p-2.5">運行路段 / 地點</th>
+                  <th class="p-2.5">交通方式 / 車次編號</th>
+                  <th class="p-2.5">行程亮點與關鍵提醒</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">08:06 - 08:38</td>
+                  <td class="p-2.5 font-medium text-slate-900">Goslar ➔ Wernigerode Hbf</td>
+                  <td class="p-2.5"><span class="font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">RE4 (32分直達)</span></td>
+                  <td class="p-2.5 text-slate-600">適用 Deutschlandticket（49€通票），出站後右轉 50m 到 HSB 車站。</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">08:45 - 09:20</td>
+                  <td class="p-2.5 font-medium text-slate-900">Wernigerode HSB 窄軌站</td>
+                  <td class="p-2.5"><span class="font-medium text-slate-800">購票 & 提早上車</span></td>
+                  <td class="p-2.5 text-slate-600">購買 €65 來回票（自由座）。建議提前 25 分鐘上車搶靠窗或室外觀景平台。</td>
+                </tr>
+                <tr class="bg-sky-50/40">
+                  <td class="p-2.5 font-mono font-bold text-sky-800 whitespace-nowrap">09:25 - 11:06</td>
+                  <td class="p-2.5 font-medium text-sky-950">Wernigerode ➔ Brocken 峰頂</td>
+                  <td class="p-2.5"><span class="font-mono font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded border border-sky-300">HSB 8943 直達</span></td>
+                  <td class="p-2.5 text-sky-900">經典蒸汽火車穿越雪白黑森林，途經 Drei Annen Hohne (10:15) 與 Schierke (10:35)。</td>
+                </tr>
+                <tr class="bg-sky-100/60 font-semibold">
+                  <td class="p-2.5 font-mono font-bold text-sky-900 whitespace-nowrap">11:06 - 13:17</td>
+                  <td class="p-2.5 font-bold text-sky-900">【方案 B 核心】布羅肯峰頂</td>
+                  <td class="p-2.5"><span class="font-bold text-sky-800 bg-white px-2 py-0.5 rounded border border-sky-300">慢活 2 小時 11 分</span></td>
+                  <td class="p-2.5 text-sky-950">參觀 Brockenhaus 博物館室內展覽避寒、探訪女巫祭壇石陣、於 Brockenwirt 喝熱湯。</td>
+                </tr>
+                <tr class="bg-sky-50/40">
+                  <td class="p-2.5 font-mono font-bold text-sky-800 whitespace-nowrap">13:17 - 15:03</td>
+                  <td class="p-2.5 font-medium text-sky-950">Brocken ➔ Wernigerode Hbf</td>
+                  <td class="p-2.5"><span class="font-mono font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded border border-sky-300">HSB 8934 Ⓓ 直達</span></td>
+                  <td class="p-2.5 text-sky-900">⚠️ 聖誕假期加開直達車！切勿搭錯 12:21 斷頭車 8926（僅到半山腰，回不到市區）！</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">15:15 - 16:45</td>
+                  <td class="p-2.5 font-medium text-slate-900">Wernigerode 木桁架老城</td>
+                  <td class="p-2.5"><span class="font-medium text-slate-800">老城重點漫步 (1.5h)</span></td>
+                  <td class="p-2.5 text-slate-600">把握日落前最後天光，造訪市政廳集市廣場拍照、購買女巫紀念品、喝咖啡暖胃。</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">17:00 - 18:00</td>
+                  <td class="p-2.5 font-medium text-slate-900">韋尼格羅德城堡 (Schloss)</td>
+                  <td class="p-2.5"><span class="font-medium text-slate-800">壓軸城堡點燈</span></td>
+                  <td class="p-2.5 text-slate-600">17:15 前入場，參觀宮殿展廳並於露台俯瞰整座女巫小鎮夢幻夜景。</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">20:18 - 20:53</td>
+                  <td class="p-2.5 font-medium text-slate-900">Wernigerode ➔ Goslar</td>
+                  <td class="p-2.5"><span class="font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">RE21 (35分直達)</span></td>
+                  <td class="p-2.5 text-slate-600">搭乘直達快車返回 Goslar 飯店休息（備案：19:21 或 21:21 RE4）。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -513,6 +674,227 @@
       </div>
     </section>
 
+    <!-- Section: Authentic Scenic & Spot Gallery (真實爬取 Threads 現場紀錄) -->
+    <section id="scenic-gallery" class="space-y-6 pt-6 border-t border-slate-200">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div>
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded text-xs font-mono bg-white shadow-sm text-slate-700 border border-slate-200 mb-2">
+            <i class="fa-solid fa-camera text-sky-600"></i> 實景圖鑑 · 現場紀實
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+            哈茨山冬日實景寫真與景點圖鑑
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">
+            取自旅人現場真實拍攝紀錄（來源：Threads @chaos.mus 2024 年末女巫小鎮與布羅肯雪峰行），拒絕隨意抓圖，忠實呈現冬日真實雪況與景致。
+          </p>
+        </div>
+
+        <a href="https://www.threads.com/@chaos.mus/post/DEM6ZOGKSlt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-700 bg-sky-50 hover:bg-sky-100 border border-sky-200 transition shrink-0">
+          <i class="fa-brands fa-threads text-base"></i> 檢視 Threads 原始貼文 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        </a>
+      </div>
+
+      <!-- Real Traveler Quote Card -->
+      <div class="bg-gradient-to-r from-sky-50/70 via-slate-50 to-white p-4 sm:p-5 rounded-2xl border border-sky-200/80 shadow-sm flex flex-col md:flex-row items-start gap-4">
+        <div class="w-10 h-10 rounded-full bg-sky-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+          <i class="fa-solid fa-quote-left text-lg"></i>
+        </div>
+        <div class="space-y-1.5">
+          <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+            <span>旅人現場真實見聞</span>
+            <span class="text-slate-400 font-normal">|</span>
+            <span class="font-mono text-slate-500 font-normal">📍 Harz, Germany · @chaos.mus</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans italic">
+            「年末住在德國的女巫鎮，搭上哈茨山列車穿梭雪白的森林到達山頂。平常歐洲的蒸汽火車像通往霍格華茲魔法世界，冬季的景觀比較容易聯想到懸疑的東方快車🤍（即使在風雪中的軌道行駛仍比DB德鐵更準時喔）」
+          </p>
+          <div class="text-[11px] text-slate-500 pt-1 flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span><i class="fa-solid fa-check text-sky-600"></i> 真實雪況：山腳城鎮無雪，需搭火車到達山頂雪線才能看見漫天厚雪</span>
+            <span><i class="fa-solid fa-clock-rotate-left text-sky-600"></i> 窄軌蒸汽火車在大風雪中運行穩定準時</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenic Spot Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- Card 1: Steam Train Snow Trail -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+          <div class="relative overflow-hidden aspect-[4/3] bg-slate-100">
+            <a href="images/harz_steam_train_snow_og.jpg" target="_blank" title="點擊檢視高解析度原圖">
+              <img src="images/harz_steam_train_snow_og.jpg" alt="哈茨山 Brockenbahn 蒸汽火車穿越雪白針葉林" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 cursor-zoom-in" loading="lazy" />
+            </a>
+            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[11px] font-bold bg-sky-600 text-white shadow-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-train"></i> Brockenbahn 蒸氣火車
+            </div>
+            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-mono bg-black/60 text-white backdrop-blur-sm">
+              8943 直達登頂班次
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 group-hover:text-sky-700 transition">
+                雪國東方快車：穿越冰封黑森林
+              </h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                哈茨窄軌鐵路（HSB）百年蒸汽機車在零下氣溫中噴發濃郁蒸氣，汽笛響徹寂靜林海。隨列車爬升穿越副極地高山針葉林，窗外漸漸轉為銀白雪國，宛如駛入霍格華茲或東方快車場景。
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>📍 Wernigerode ➔ Brocken</span>
+              <span class="text-sky-600 font-medium">單程 101 分鐘</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Brocken Summit Plateau -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+          <div class="relative overflow-hidden aspect-[4/3] bg-slate-100">
+            <a href="images/harz_winter_landscape_1.jpg" target="_blank" title="點擊檢視高解析度原圖">
+              <img src="images/harz_winter_landscape_1.jpg" alt="布羅肯峰頂廣袤雪原與冷戰天線罩" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 cursor-zoom-in" loading="lazy" />
+            </a>
+            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[11px] font-bold bg-sky-600 text-white shadow-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-mountain"></i> 布羅肯峰頂 1,141m
+            </div>
+            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-mono bg-black/60 text-white backdrop-blur-sm">
+              北德最高峰雪原
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 group-hover:text-sky-700 transition">
+                布羅肯峰頂：冰原與冷戰地標
+              </h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                海拔 1,141 公尺的哈茨山最高峰。冬季長年受大西洋強勁西風侵襲，經常處於暴風雪與零下低溫中。峰頂矗立著冷戰時期的巨型圓形雷達天線罩（Radom）與舊圍牆遺址，視野磅礴蒼茫。
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>📍 Brocken 峰頂終點站</span>
+              <span class="text-sky-600 font-medium">體感可達 -15°C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Snow-covered Pines & Railway -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+          <div class="relative overflow-hidden aspect-[4/3] bg-slate-100">
+            <a href="images/harz_snow_forest_summit.jpg" target="_blank" title="點擊檢視高解析度原圖">
+              <img src="images/harz_snow_forest_summit.jpg" alt="哈茨山雪白森林與冰封雲杉林" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 cursor-zoom-in" loading="lazy" />
+            </a>
+            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[11px] font-bold bg-sky-600 text-white shadow-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-tree"></i> 副極地雪白森林
+            </div>
+            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-mono bg-black/60 text-white backdrop-blur-sm">
+              高山霧淞與白雪
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 group-hover:text-sky-700 transition">
+                高山雲杉霧淞與銀白雪海
+              </h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                列車從 Schierke 站（海拔 614m）向上爬升後進入厚雪帶，雲杉樹冠掛滿厚重的晶瑩冰雪霧淞，地面深雪壓沒鐵軌兩側，純粹雪白的世界是旅人相機中最難忘的冬日絕景。
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>📍 Schierke ➔ Brocken</span>
+              <span class="text-sky-600 font-medium">雪線界標 800m+</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Witch Town Half-timbered Street -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+          <div class="relative overflow-hidden aspect-[4/3] bg-slate-100">
+            <a href="images/harz_witch_town_scenery_1.jpg" target="_blank" title="點擊檢視高解析度原圖">
+              <img src="images/harz_witch_town_scenery_1.jpg" alt="女巫之鎮韋尼格羅德街道與彩色木桁架老屋" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 cursor-zoom-in" loading="lazy" />
+            </a>
+            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[11px] font-bold bg-sky-600 text-white shadow-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-hat-wizard"></i> 女巫之鎮街景
+            </div>
+            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-mono bg-black/60 text-white backdrop-blur-sm">
+              Wernigerode 老城
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 group-hover:text-sky-700 transition">
+                歌德《浮士德》女巫傳說起源地
+              </h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                山腳下的韋尼格羅德因傳說中女巫在五月一日前夕（Walpurgisnacht）騎著掃帚飛往布羅肯峰聚會而享譽世界。整座小鎮保留濃厚的中世紀民俗氛圍，四處可見逗趣的女巫裝飾與特色小店。
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>📍 Marktplatz 市政廳周邊</span>
+              <span class="text-sky-600 font-medium">平地氣溫約 2~5°C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Fachwerkhäuser Architecture -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+          <div class="relative overflow-hidden aspect-[4/3] bg-slate-100">
+            <a href="images/harz_witch_town_scenery_2.jpg" target="_blank" title="點擊檢視高解析度原圖">
+              <img src="images/harz_witch_town_scenery_2.jpg" alt="歷史半木結構老宅與鵝卵石街道" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 cursor-zoom-in" loading="lazy" />
+            </a>
+            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[11px] font-bold bg-sky-600 text-white shadow-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-house-chimney"></i> 百年半木結構建築
+            </div>
+            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-mono bg-black/60 text-white backdrop-blur-sm">
+              Fachwerk 建築瑰寶
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 group-hover:text-sky-700 transition">
+                五百年雕花木桁架與石板街
+              </h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                被譽為「哈茨彩色珍珠」，街道兩側林立數百年歷史的木骨架老宅（Fachwerkhäuser），樑柱刻有細膩雕花與日耳曼古老符號，漫步其中彷彿步入格林童話插畫的世界。
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>📍 Breite Straße 步行街</span>
+              <span class="text-sky-600 font-medium">推薦散步 2.5 小時</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Castle & Mountain Panorama -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+          <div class="relative overflow-hidden aspect-[4/3] bg-slate-100">
+            <a href="images/harz_winter_landscape_2.jpg" target="_blank" title="點擊檢視高解析度原圖">
+              <img src="images/harz_winter_landscape_2.jpg" alt="韋尼格羅德城堡居高臨下俯瞰冬日哈茨山嶺" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 cursor-zoom-in" loading="lazy" />
+            </a>
+            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[11px] font-bold bg-sky-600 text-white shadow-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-chess-rook"></i> 浪漫主義城堡
+            </div>
+            <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-mono bg-black/60 text-white backdrop-blur-sm">
+              Schloss Wernigerode
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 group-hover:text-sky-700 transition">
+                阿格涅斯山俯瞰雪嶺與童話城堡
+              </h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                矗立在阿格涅斯堡山頂的新哥德式城堡，居高臨下俯瞰整個小鎮橙紅屋頂與遠處布羅肯雪峰。冬日黃昏點上暖黃燈光時，神秘魔幻的氣息格外迷人，是行程中最完美的壓軸景致。
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>📍 Schloss Agnesberg</span>
+              <span class="text-sky-600 font-medium">17:15 最後入館</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Section 2: Complete Timetables (HSB + DB) -->
     <section id="full-timetables" class="space-y-6 pt-6 border-t border-slate-200">
       <div>
@@ -682,14 +1064,14 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 text-slate-800">
-                <tr class="bg-sky-50/80 font-semibold text-sky-950">
-                  <td class="font-bold text-sky-600">8944 ⚡</td>
+                <tr :class="plan === 'A' ? 'bg-sky-100 text-sky-950 font-bold ring-2 ring-sky-500 shadow-sm' : 'text-slate-700 bg-white hover:bg-slate-50'" class="transition">
+                  <td class="font-bold text-sky-700">8944 ⚡</td>
                   <td class="font-sans">蒸汽火車</td>
                   <td class="font-bold text-sky-700">11:30</td>
                   <td>12:03</td>
                   <td>12:28</td>
                   <td class="font-bold text-slate-900">13:29</td>
-                  <td class="font-sans text-sky-800 font-medium">【方案 A 核心】8943 原車原班折返直達！峰頂快閃 24 分鐘避寒</td>
+                  <td class="font-sans text-sky-800 font-medium">【方案 A 核心】8943 原車原班折返直達！峰頂快閃 24 分鐘避寒 <span x-show="plan === 'A'" class="ml-1.5 text-[10px] px-1.5 py-0.5 rounded bg-sky-600 text-white font-sans">當前選定</span></td>
                 </tr>
                 <tr class="bg-rose-50/60 text-slate-600">
                   <td class="font-bold text-rose-600">8926 ⚠️</td>
@@ -700,14 +1082,14 @@
                   <td class="text-rose-600 font-semibold">不到市區</td>
                   <td class="font-sans text-rose-700 font-medium">⚠️ 避雷：僅開到半山腰，回不到 Wernigerode 市區，千萬不要搭錯！</td>
                 </tr>
-                <tr class="bg-blue-50/60 font-semibold text-blue-950">
+                <tr :class="plan === 'B' ? 'bg-sky-100 text-sky-950 font-bold ring-2 ring-sky-500 shadow-sm' : 'text-slate-700 bg-white hover:bg-slate-50'" class="transition">
                   <td class="font-bold text-blue-700">8934 Ⓓ</td>
                   <td class="font-sans">蒸汽火車</td>
                   <td class="font-bold text-blue-800">13:17</td>
                   <td>13:47</td>
                   <td>14:14</td>
                   <td class="font-bold text-slate-900">15:03</td>
-                  <td class="font-sans text-blue-900 font-medium">【方案 B 核心】Ⓓ 聖誕連假加開直達車！峰頂停留 2 小時 11 分</td>
+                  <td class="font-sans text-blue-900 font-medium">【方案 B 核心】Ⓓ 聖誕連假加開直達車！峰頂停留 2 小時 11 分 <span x-show="plan === 'B'" class="ml-1.5 text-[10px] px-1.5 py-0.5 rounded bg-sky-600 text-white font-sans">當前選定</span></td>
                 </tr>
                 <tr>
                   <td class="font-bold text-slate-700">8922</td>
@@ -822,14 +1204,14 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 text-slate-700">
-              <tr class="bg-sky-50/80 font-medium">
+              <tr :class="plan === 'A' ? 'bg-sky-100 text-sky-950 font-bold ring-2 ring-sky-500' : 'text-slate-700 bg-white hover:bg-slate-50'" class="transition">
                 <td class="p-2.5 text-sky-600">8944 ⚡</td>
                 <td class="p-2.5 font-sans">蒸汽火車</td>
                 <td class="p-2.5 text-sky-700 font-bold">11:30</td>
                 <td class="p-2.5">12:03</td>
                 <td class="p-2.5">12:28</td>
                 <td class="p-2.5 text-slate-900">13:29</td>
-                <td class="p-2.5 font-sans text-sky-700">【方案 A 核心】8943 原車折返直達！</td>
+                <td class="p-2.5 font-sans text-sky-700">【方案 A 核心】8943 原車折返直達！ <span x-show="plan === 'A'" class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-sky-600 text-white font-sans">當前選定</span></td>
               </tr>
               <tr class="text-slate-500 bg-slate-50/50">
                 <td class="p-2.5">8926</td>
@@ -840,14 +1222,14 @@
                 <td class="p-2.5 font-sans text-rose-300">不進市區</td>
                 <td class="p-2.5 font-sans text-rose-300">⚠️ 僅到半山腰，回不了市區請勿搭乘</td>
               </tr>
-              <tr class="bg-sky-50/50 font-medium">
+              <tr :class="plan === 'B' ? 'bg-sky-100 text-sky-950 font-bold ring-2 ring-sky-500' : 'text-slate-700 bg-white hover:bg-slate-50'" class="transition">
                 <td class="p-2.5 text-slate-800">8934 Ⓓ ★</td>
                 <td class="p-2.5 font-sans">蒸汽火車</td>
                 <td class="p-2.5 text-slate-900">13:17</td>
                 <td class="p-2.5">13:47</td>
                 <td class="p-2.5">14:14</td>
                 <td class="p-2.5 text-slate-900">15:03</td>
-                <td class="p-2.5 font-sans text-slate-700">【方案 B 核心】Ⓓ 聖誕加開直達車</td>
+                <td class="p-2.5 font-sans text-slate-700">【方案 B 核心】Ⓓ 聖誕加開直達車 <span x-show="plan === 'B'" class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-sky-600 text-white font-sans">當前選定</span></td>
               </tr>
               <tr>
                 <td class="p-2.5 text-slate-500">8924</td>
