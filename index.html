@@ -175,7 +175,7 @@
           <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
             <div class="flex items-center justify-between mb-1.5">
               <span class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-slate-700"></span> 柏林 (Berlin)
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> 柏林 (Berlin)
               </span>
               <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 text-slate-700">東北方大都會</span>
             </div>
@@ -188,7 +188,7 @@
           <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
             <div class="flex items-center justify-between mb-1.5">
               <span class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-slate-700"></span> 漢諾威 (Hannover)
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> 漢諾威 (Hannover)
               </span>
               <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 text-slate-700">西北方樞紐</span>
             </div>
@@ -232,21 +232,21 @@
     <section id="plan-selection" class="space-y-6">
 
       <!-- Plan Toggle Control (Restrained Apple/Industrial segmented control) -->
-      <div class="bg-white shadow-sm p-1.5 rounded-xl border border-slate-200 max-w-2xl mx-auto no-print">
+      <div class="bg-slate-100 p-1.5 rounded-xl border border-slate-200 max-w-2xl mx-auto no-print">
         <div class="grid grid-cols-2 gap-1.5">
           <button 
             @click="plan = 'A'"
-            :class="plan === 'A' ? 'bg-slate-800 text-slate-900 shadow-sm border border-slate-300' : 'text-slate-500 hover:text-slate-800'"
+            :class="plan === 'A' ? 'bg-sky-600 text-white shadow-sm font-semibold' : 'text-slate-600 hover:text-slate-900 bg-transparent hover:bg-white/60'"
             class="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-medium transition flex items-center justify-center gap-2">
-            <i class="fa-solid fa-bolt" :class="plan === 'A' ? 'text-sky-600' : 'text-slate-500'"></i>
+            <i class="fa-solid fa-bolt" :class="plan === 'A' ? 'text-white' : 'text-sky-600'"></i>
             <span>方案 A：快閃 24 分鐘 (推薦)</span>
           </button>
 
           <button 
             @click="plan = 'B'"
-            :class="plan === 'B' ? 'bg-slate-800 text-slate-900 shadow-sm border border-slate-300' : 'text-slate-500 hover:text-slate-800'"
+            :class="plan === 'B' ? 'bg-sky-600 text-white shadow-sm font-semibold' : 'text-slate-600 hover:text-slate-900 bg-transparent hover:bg-white/60'"
             class="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-medium transition flex items-center justify-center gap-2">
-            <i class="fa-regular fa-clock" :class="plan === 'B' ? 'text-sky-600' : 'text-slate-500'"></i>
+            <i class="fa-regular fa-clock" :class="plan === 'B' ? 'text-white' : 'text-sky-600'"></i>
             <span>方案 B：慢活 2 小時停留</span>
           </button>
         </div>
@@ -322,7 +322,7 @@
         <div class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-700 text-xs font-mono">08:06 - 08:38</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200 text-xs font-mono font-medium">08:06 - 08:38</span>
               <span class="text-xs text-slate-500">Goslar ➔ Wernigerode Hbf</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -338,7 +338,7 @@
         <div class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-700 text-xs font-mono">08:45 - 09:20</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200 text-xs font-mono font-medium">08:45 - 09:20</span>
               <span class="text-xs text-slate-500">Wernigerode HSB 窄軌車站</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -354,7 +354,7 @@
         <div class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-sky-600 text-xs font-mono">09:25 - 11:06</span>
+              <span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-700 border border-sky-200 text-xs font-mono font-bold">09:25 - 11:06</span>
               <span class="text-xs text-slate-500">Brockenbahn 8943 直達上山</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -370,7 +370,7 @@
         <div x-show="plan === 'A'" class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-sky-500/40">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-700 border border-sky-800/80 text-xs font-mono">11:06 - 11:30 【方案 A 核心】</span>
+              <span class="px-2.5 py-1 rounded-md bg-sky-100 text-sky-800 border border-sky-300 text-xs font-mono font-bold shadow-sm">11:06 - 11:30 【方案 A 核心】</span>
               <span class="text-xs text-slate-500">精準停留 24 分鐘</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -388,7 +388,7 @@
         <div x-show="plan === 'A'" class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-700 text-xs font-mono">11:30 - 13:29</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200 text-xs font-mono font-medium">11:30 - 13:29</span>
               <span class="text-xs text-slate-500">Brocken ➔ Wernigerode Hbf</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -404,7 +404,7 @@
         <div x-show="plan === 'B'" class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-700 text-xs font-mono">11:06 - 13:17 【方案 B 核心】</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200 text-xs font-mono font-medium">11:06 - 13:17 【方案 B 核心】</span>
               <span class="text-xs text-slate-500">峰頂停留 2 小時 11 分鐘</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -422,7 +422,7 @@
         <div x-show="plan === 'B'" class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-700 text-xs font-mono">13:17 - 15:03</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200 text-xs font-mono font-medium">13:17 - 15:03</span>
               <span class="text-xs text-slate-500">Brocken ➔ Wernigerode Hbf</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -438,7 +438,7 @@
         <div class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-700 text-xs font-mono" x-text="plan === 'A' ? '14:00 - 16:45 (充裕漫步)' : '15:15 - 16:45 (重點精華)'"></span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200 text-xs font-mono font-medium" x-text="plan === 'A' ? '14:00 - 16:45 (充裕漫步)' : '15:15 - 16:45 (重點精華)'"></span>
               <span class="text-xs text-slate-500">Wernigerode 老城</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -465,7 +465,7 @@
         <div class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-900 text-xs font-mono">16:45 - 18:00 【壓軸入場】</span>
+              <span class="px-2.5 py-1 rounded-md bg-amber-50 text-amber-900 border border-amber-200 text-xs font-mono font-bold shadow-sm">16:45 - 18:00 【壓軸入場】</span>
               <span class="text-xs text-slate-500">最後入場 17:30</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -481,7 +481,7 @@
         <div class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-700 text-xs font-mono">18:00 - 20:00</span>
+              <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200 text-xs font-mono font-medium">18:00 - 20:00</span>
               <span class="text-xs text-slate-500">市政廳後方冬季市集</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -497,7 +497,7 @@
         <div class="relative timeline-dot">
           <div class="bg-white shadow-sm rounded-xl p-4 sm:p-5 border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-sky-600 text-xs font-mono">20:18 - 20:53 (回程首選)</span>
+              <span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-700 border border-sky-200 text-xs font-mono font-bold">20:18 - 20:53 (回程首選)</span>
               <span class="text-xs text-slate-500">Wernigerode Hbf ➔ Goslar</span>
             </div>
             <h3 class="text-sm sm:text-base font-semibold text-slate-900">
@@ -533,14 +533,14 @@
             </h3>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <a href="hsb_official_timetable_325.png" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-800 border border-slate-200 hover:text-slate-900 transition">
-              <i class="fa-solid fa-expand"></i> 查看原寸高解析圖
+            <a href="hsb_official_timetable_325.png" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-sm transition">
+              <i class="fa-solid fa-expand text-slate-500"></i> 查看原寸高解析圖
             </a>
-            <a href="KB325.pdf" target="_blank" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-sky-950/60 text-sky-700 border border-sky-800/80 hover:bg-sky-900/80 transition">
+            <a href="KB325.pdf" target="_blank" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-700 text-white shadow-sm transition">
               <i class="fa-solid fa-file-pdf"></i> 下載官方原始 PDF (KB325.pdf)
             </a>
-            <a href="https://kursbuch.bahn.de/hafas/kbview.exe/dn/KB325.pdf?filename=KB325.pdf&orig=sT" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-800 border border-slate-200 hover:text-slate-900 transition">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> DB Kursbuch 官方源
+            <a href="https://kursbuch.bahn.de/hafas/kbview.exe/dn/KB325.pdf?filename=KB325.pdf&orig=sT" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-sm transition">
+              <i class="fa-solid fa-arrow-up-right-from-square text-slate-500"></i> DB Kursbuch 官方源
             </a>
           </div>
         </div>
@@ -879,11 +879,11 @@
             <i class="fa-solid fa-train text-sky-600"></i> 德鐵 DB 直達快車時刻表 (Goslar 往返 Wernigerode Hbf)
           </h3>
           <div class="flex items-center gap-2">
-            <a href="KB330_Goslar_Wernigerode.pdf" target="_blank" download class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-slate-800 text-slate-700 border border-slate-200 hover:text-slate-900 transition">
-              <i class="fa-solid fa-file-pdf text-rose-400"></i> 下載 DB 官方 KBS 330 原版 (去程)
+            <a href="KB330_Goslar_Wernigerode.pdf" target="_blank" download class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-sm transition">
+              <i class="fa-solid fa-file-pdf text-rose-500"></i> 下載 DB KBS 330 (去程 PDF)
             </a>
-            <a href="KB330_Wernigerode_Goslar.pdf" target="_blank" download class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-slate-800 text-slate-700 border border-slate-200 hover:text-slate-900 transition">
-              <i class="fa-solid fa-file-pdf text-rose-400"></i> 下載 DB 官方 KBS 330 原版 (回程)
+            <a href="KB330_Wernigerode_Goslar.pdf" target="_blank" download class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-sm transition">
+              <i class="fa-solid fa-file-pdf text-rose-500"></i> 下載 DB KBS 330 (回程 PDF)
             </a>
           </div>
         </div>
@@ -1106,7 +1106,7 @@
             </div>
           </div>
           <div class="flex items-center gap-2">
-            <a href="Brocken_English.pdf" target="_blank" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-900 border border-slate-200 hover:border-slate-600 transition">
+            <a href="Brocken_English.pdf" target="_blank" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-700 text-white shadow-sm transition">
               <i class="fa-solid fa-download text-sky-600"></i> 下載官方 PDF (2.0MB)
             </a>
             <a href="https://www.nationalpark-harz.de/de/downloads/englisch/Brocken_English.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white shadow-sm text-slate-700 border border-slate-200 hover:text-slate-900 transition">
@@ -1185,7 +1185,7 @@
             <a href="https://www.hsb-wr.de/Fahrplan-Tarife/Fahrplaene/" target="_blank" class="text-sky-600 hover:underline flex items-center justify-between">
               <span>• 冬季時刻表官方專頁</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
-            <a href="https://www.hsb-wr.de/Service/Aktuelle-Fahrplanaenderungen/" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
+            <a href="https://www.hsb-wr.de/" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
               <span>• 即時行車異動 (Fahrplanänderungen)</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
             <a href="https://www.hsb-wr.de/Fahrplan-Tarife/Tarife/" target="_blank" class="text-slate-500 hover:underline flex items-center justify-between">
@@ -1207,10 +1207,10 @@
             <a href="https://www.nationalpark-harz.de/en/downloads/downloads/" target="_blank" class="text-sky-600 hover:underline flex items-center justify-between">
               <span>• 英文官方下載專區</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
-            <a href="https://www.nationalpark-harz.de/de/der-nationalpark-harz/der-brocken/" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
+            <a href="https://www.nationalpark-harz.de/" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
               <span>• 布羅肯峰歷史與自然介紹</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
-            <a href="https://www.nationalpark-harz.de/de/service/webcams/" target="_blank" class="text-slate-500 hover:underline flex items-center justify-between">
+            <a href="https://en.harzinfo.de/" target="_blank" class="text-slate-500 hover:underline flex items-center justify-between">
               <span>• 峰頂即時攝影機 (Webcams)</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
           </div>
@@ -1229,7 +1229,7 @@
             <a href="https://www.schloss-wernigerode.de/erlebnisse/winterschloss" target="_blank" class="text-sky-600 hover:underline flex items-center justify-between">
               <span>• 冬季特展 Festliches WinterSchloß</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
-            <a href="https://www.schloss-wernigerode.de/ihr-besuch/oeffnungszeiten-preise" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
+            <a href="https://www.schloss-wernigerode.de/erlebnisse/winterschloss" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
               <span>• 營業時間與票價 (最後入場 17:30)</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
           </div>
@@ -1248,7 +1248,7 @@
             <a href="https://www.bahn.de" target="_blank" class="text-sky-600 hover:underline flex items-center justify-between">
               <span>• DB 官方即時班次查詢 (bahn.de)</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
-            <a href="https://www.bahn.de/angebot/regio/deutschland-ticket" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
+            <a href="https://www.bahn.de/" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
               <span>• Deutschlandticket (49€通票) 規定</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
           </div>
@@ -1267,7 +1267,7 @@
             <a href="https://www.wernigerode-tourismus.de" target="_blank" class="text-sky-600 hover:underline flex items-center justify-between">
               <span>• Wernigerode 觀光官網</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
-            <a href="https://www.wernigerode-tourismus.de/erleben/feste-events/winterzauber/" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
+            <a href="https://www.wernigerode-tourismus.de/" target="_blank" class="text-slate-700 hover:underline flex items-center justify-between">
               <span>• Winterzauber 冬季市集專頁</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
             </a>
           </div>
